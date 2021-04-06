@@ -11,7 +11,7 @@ def log(sq):
 	ml=0
 	for r in sq:
 		for c in r:
-			if (c==None):
+			if (c is None):
 				continue
 			ml=max(ml,len(str(c)))
 	ml+=2
@@ -60,7 +60,7 @@ def solve(sq,log_steps=False):
 			alg="0"
 		try:
 			alg=int(alg)
-		except:
+		except ValueError:
 			pass
 		return alg
 	def conv_alg(sml):
@@ -107,17 +107,16 @@ def solve(sq,log_steps=False):
 	ot=[]
 	for r in sq:
 		for c in r:
-			if (c==None):
+			if (c is None):
 				left+=1
 			else:
 				ot.append(c)
-				c=dict_to_alg(alg_to_dict(c))
 	ot=conv_alg(ot)
 	for i in range(0,h):
 		sml=[]
 		s=True
 		for j in range(0,w):
-			if (sq[i][j]==None):
+			if (sq[i][j] is None):
 				s=False
 				break
 			else:
@@ -130,7 +129,7 @@ def solve(sq,log_steps=False):
 			sml=[]
 			s=True
 			for j in range(0,w):
-				if (sq[j][i]==None):
+				if (sq[j][i] is None):
 					s=False
 					break
 				else:
@@ -142,7 +141,7 @@ def solve(sq,log_steps=False):
 		sml=[]
 		s=True
 		for i in range(0,min(w,h)):
-			if (sq[i][i]==None):
+			if (sq[i][i] is None):
 				s=False
 				break
 			else:
@@ -153,7 +152,7 @@ def solve(sq,log_steps=False):
 		sml=[]
 		s=True
 		for i in range(0,min(w,h)):
-			if (sq[i][min(w,h)-1-i]==None):
+			if (sq[i][min(w,h)-1-i] is None):
 				s=False
 				break
 			else:
@@ -175,7 +174,7 @@ def solve(sq,log_steps=False):
 			sml=[]
 			off=0
 			for j in range(0,w):
-				if (sq[i][j]==None):
+				if (sq[i][j] is None):
 					cnt+=1
 					off=j
 				else:
@@ -192,7 +191,7 @@ def solve(sq,log_steps=False):
 			sml=[]
 			off=0
 			for j in range(0,w):
-				if (sq[j][i]==None):
+				if (sq[j][i] is None):
 					cnt+=1
 					off=j
 				else:
@@ -208,7 +207,7 @@ def solve(sq,log_steps=False):
 		sml=[]
 		off=0
 		for i in range(0,min(w,h)):
-			if (sq[i][i]==None):
+			if (sq[i][i] is None):
 				cnt+=1
 				off=i
 			else:
@@ -223,7 +222,7 @@ def solve(sq,log_steps=False):
 		sml=[]
 		off=0
 		for i in range(0,min(w,h)):
-			if (sq[i][min(w,h)-1-i]==None):
+			if (sq[i][min(w,h)-1-i] is None):
 				cnt+=1
 				off=i
 			else:
@@ -265,4 +264,9 @@ if __name__=="__main__":
 	sq=[["5p+2",0,"4p+1"],["2p",None,None],[None,None,None]]
 	# sq=[["n","2m",None],["2m+2n",None,None],["m",None,None]]
 	# sq=[["4a+b","2c",None],[None,"3a+b+c",None],[None,None,"2a+b+2c"]]
-	print(log(sq),log(solve(sq,log_steps=False)[1]))
+	print(log(sq))
+	o=solve(sq,log_steps=False)
+	if (o[0]==False):
+		print(o[1])
+	else:
+		print(log(o[1]))
